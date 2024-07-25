@@ -107,6 +107,11 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    doorkeeper (5.7.1)
+      railties (>= 5)
+    doorkeeper-openid_connect (1.8.9)
+      doorkeeper (>= 5.5, < 5.8)
+      jwt (>= 2.5)
     drb (2.2.1)
     erubi (1.13.0)
     globalid (1.2.1)
@@ -118,6 +123,8 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.7.2)
+    jwt (2.8.2)
+      base64
     language_server-protocol (3.17.0.3)
     logger (1.6.0)
     loofah (2.22.0)
@@ -299,6 +306,8 @@ PLATFORMS
 DEPENDENCIES
   capybara
   devise
+  doorkeeper
+  doorkeeper-openid_connect
   mysql2 (~> 0.5)
   pry-byebug
   pry-doc

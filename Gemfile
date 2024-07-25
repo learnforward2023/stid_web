@@ -7,6 +7,8 @@ ruby '3.3.3'
 gem 'rails', '~> 7.1.3', '>= 7.1.3.4'
 
 gem 'devise'
+gem 'doorkeeper'
+gem 'doorkeeper-openid_connect'
 gem 'mysql2', '~> 0.5'
 gem 'puma', '>= 5.0'
 gem 'sprockets-rails'

@@ -6,9 +6,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :uuid, presence: true, uniqueness: true
+  before_validation :set_uuid, on: :create
 
-  before_create :set_uuid
+  validates :uuid, presence: true, uniqueness: true
 
   private
 
