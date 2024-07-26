@@ -1,10 +1,8 @@
-<div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
+<div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 p-4"
+  style="background-image: url('/images/background.png'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+>
   <div class="w-full max-w-3xl">
     <main role="main" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg">
-      <p class="text-lg text-gray-800 dark:text-gray-200 mb-6">
-        <%= content_tag(:strong, class: 'text-indigo-600 dark:text-indigo-400') { @pre_auth.client.name } %> configuration is wrong.
-      </p>
-
       <div class="text-sm text-red-600 bg-gray-100 dark:bg-gray-900 p-4 rounded-lg">
         <% error_messages = (local_assigns[:error_response] ? error_response : @pre_auth.error_response).body[:error_description] %>
         <% error_messages.split("\n").each do |message| %>

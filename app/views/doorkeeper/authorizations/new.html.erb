@@ -1,8 +1,10 @@
-<div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
+<div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 p-4"
+  style="background-image: url('/images/background.png'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+>
   <div class="w-full max-w-2xl bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg space-y-6">
     <main role="main" class="space-y-6">
       <p class="text-lg text-gray-800 dark:text-gray-200">
-        <%= raw t('.prompt', client_name: content_tag(:strong, class: 'text-indigo-600 dark:text-indigo-400') { @pre_auth.client.name }) %>
+        <%= raw t('.prompt', client_name: content_tag(:strong, class: 'text-indigo-600 dark:text-indigo-400') { @pre_auth.client&.name }) %>
       </p>
 
       <% if @pre_auth.scopes.count > 0 %>
