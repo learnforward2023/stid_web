@@ -12,6 +12,7 @@ gem 'doorkeeper-openid_connect'
 gem 'mysql2', '~> 0.5'
 gem 'puma', '>= 5.0'
 gem 'sprockets-rails'
+gem 'sassc-rails'
 
 group :development, :test do
   gem 'pry-byebug'
