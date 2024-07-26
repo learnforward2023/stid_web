@@ -6,6 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_and_belongs_to_many :companies # rubocop:disable Rails/HasAndBelongsToMany
+
   before_validation :set_uuid, on: :create
 
   validates :uuid, presence: true, uniqueness: true
