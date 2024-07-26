@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_25_135643) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_26_130916) do
   create_table "oauth_access_grants", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
     t.bigint "application_id", null: false
@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_25_135643) do
     t.boolean "confidential", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "skip_authorization", default: false
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 

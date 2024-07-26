@@ -9,11 +9,12 @@
       <% else %>
         <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-300">Hello <%= current_user.email %></h2>
         <div class="flex justify-center space-x-4 mt-4">
-          <%= link_to 'Admin', '/admin', class: "text-green-600 hover:underline dark:text-green-400" %>
-          <span class="text-gray-500">|</span>
-          <%= link_to 'Applications', '/oauth/applications', class: "text-green-600 hover:underline dark:text-green-400" %>
-          <span class="text-gray-500">|</span>
-          <%= button_to destroy_user_session_path, method: :delete, class: "text-red-600 hover:underline dark:text-red-400" do %>Log out<% end %>
+          <%# If user is admin so display link to application %>
+          <% if current_user.admin? %>
+            <%= link_to 'Applications', '/oauth/applications', class: "text-green-600 hover:underline dark:text-green-400" %>
+            <span class="text-gray-500">|</span>
+          <% end %>
+          <%= button_to destroy_user_session_path, method: :delete, class: "cursor-pointer text-red-600 hover:underline dark:text-red-400" do %>Log out<% end %>
         </div>
       <% end %>
     </div>

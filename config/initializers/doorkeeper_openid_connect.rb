@@ -5,11 +5,7 @@ Doorkeeper::OpenidConnect.configure do
     'issuer string'
   end
 
-  signing_key <<~KEY
-    -----BEGIN RSA PRIVATE KEY-----
-    ....
-    -----END RSA PRIVATE KEY-----
-  KEY
+  signing_key ENV.fetch('OPENID_CONNECT_SIGNING_KEY', OpenSSL::PKey::RSA.new(2048).to_pem)
 
   subject_types_supported [:public]
 

@@ -1,0 +1,46 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
+  <div class="w-full max-w-2xl bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg space-y-6">
+    <main role="main" class="space-y-6">
+      <p class="text-lg text-gray-800 dark:text-gray-200">
+        <%= raw t('.prompt', client_name: content_tag(:strong, class: 'text-indigo-600 dark:text-indigo-400') { @pre_auth.client.name }) %>
+      </p>
+
+      <% if @pre_auth.scopes.count > 0 %>
+        <div id="oauth-permissions" class="space-y-2">
+          <p class="text-lg text-gray-800 dark:text-gray-200"><%= t('.able_to') %>:</p>
+          <ul class="list-disc pl-5 text-indigo-600 dark:text-indigo-400">
+            <% @pre_auth.scopes.each do |scope| %>
+              <li><%= t scope, scope: [:doorkeeper, :scopes] %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="actions space-y-2">
+        <%= form_tag oauth_authorization_path, method: :post, class: 'space-y-1' do %>
+          <%= hidden_field_tag :client_id, @pre_auth.client.uid, id: nil %>
+          <%= hidden_field_tag :redirect_uri, @pre_auth.redirect_uri, id: nil %>
+          <%= hidden_field_tag :state, @pre_auth.state, id: nil %>
+          <%= hidden_field_tag :response_type, @pre_auth.response_type, id: nil %>
+          <%= hidden_field_tag :response_mode, @pre_auth.response_mode, id: nil %>
+          <%= hidden_field_tag :scope, @pre_auth.scope, id: nil %>
+          <%= hidden_field_tag :code_challenge, @pre_auth.code_challenge, id: nil %>
+          <%= hidden_field_tag :code_challenge_method, @pre_auth.code_challenge_method, id: nil %>
+          <%= submit_tag t('doorkeeper.authorizations.buttons.authorize'), class: "cursor-pointer w-full py-2 px-4 bg-green-600 text-white text-lg rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
+        <% end %>
+
+        <%= form_tag oauth_authorization_path, method: :delete, class: 'space-y-1' do %>
+          <%= hidden_field_tag :client_id, @pre_auth.client.uid, id: nil %>
+          <%= hidden_field_tag :redirect_uri, @pre_auth.redirect_uri, id: nil %>
+          <%= hidden_field_tag :state, @pre_auth.state, id: nil %>
+          <%= hidden_field_tag :response_type, @pre_auth.response_type, id: nil %>
+          <%= hidden_field_tag :response_mode, @pre_auth.response_mode, id: nil %>
+          <%= hidden_field_tag :scope, @pre_auth.scope, id: nil %>
+          <%= hidden_field_tag :code_challenge, @pre_auth.code_challenge, id: nil %>
+          <%= hidden_field_tag :code_challenge_method, @pre_auth.code_challenge_method, id: nil %>
+          <%= submit_tag t('doorkeeper.authorizations.buttons.deny'), class: "cursor-pointer w-full py-2 px-2 bg-red-600 text-white text-lg rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
+        <% end %>
+      </div>
+    </main>
+  </div>
+</div>

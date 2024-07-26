@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  use_doorkeeper_openid_connect
-  use_doorkeeper
   root to: 'top#index'
+
   devise_for :users
+  use_doorkeeper_openid_connect
+  use_doorkeeper do
+    controllers applications: 'doorkeepers/oauth_applications'
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
