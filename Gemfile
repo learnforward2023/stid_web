@@ -13,6 +13,7 @@ gem 'doorkeeper'
 gem 'doorkeeper-openid_connect'
 gem 'mysql2', '~> 0.5'
 gem 'puma', '>= 5.0'
+gem 'sassc-rails'
 gem 'sprockets-rails'
 
 group :development, :test do
