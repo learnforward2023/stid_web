@@ -6,6 +6,7 @@ ruby '3.3.3'
 
 gem 'rails', '~> 7.1.3', '>= 7.1.3.4'
 
+gem 'activeadmin'
 gem 'cancancan'
 gem 'devise'
 gem 'doorkeeper'
