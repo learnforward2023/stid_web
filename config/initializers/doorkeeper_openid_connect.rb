@@ -10,8 +10,7 @@ Doorkeeper::OpenidConnect.configure do
   subject_types_supported [:public]
 
   resource_owner_from_access_token do |access_token|
-    # Example implementation:
-    # User.find_by(id: access_token.resource_owner_id)
+    User.find_by(id: access_token.resource_owner_id)
   end
 
   auth_time_from_resource_owner do |resource_owner|
@@ -38,12 +37,8 @@ Doorkeeper::OpenidConnect.configure do
     # redirect_to account_select_url
   end
 
-  subject do |resource_owner, application|
-    # Example implementation:
-    # resource_owner.id
-
-    # or if you need pairwise subject identifier, implement like below:
-    # Digest::SHA256.hexdigest("#{resource_owner.id}#{URI.parse(application.redirect_uri).host}#{'your_secret_salt'}")
+  subject do |resource_owner, _application|
+    resource_owner.uuid
   end
 
   # Protocol to use when generating URIs for the discovery endpoint,
@@ -55,14 +50,21 @@ Doorkeeper::OpenidConnect.configure do
   # Expiration time on or after which the ID Token MUST NOT be accepted for processing. (default 120 seconds).
   # expiration 600
 
-  # Example claims:
-  # claims do
-  #   normal_claim :_foo_ do |resource_owner|
-  #     resource_owner.foo
-  #   end
+  claims do
+    with_options scope: :openid do
+      normal_claim :sub, &:uuid
+    end
 
-  #   normal_claim :_bar_ do |resource_owner|
-  #     resource_owner.bar
-  #   end
-  # end
+    with_options scope: :email do
+      normal_claim :email, response: %i[id_token userinfo] do |resource_owner, _scope, _access_token|
+        resource_owner.email
+      end
+    end
+
+    with_options scope: :profile do
+      normal_claim :phone_number, &:phone_number
+
+      normal_claim :name, &:name
+    end
+  end
 end
